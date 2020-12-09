@@ -1,6 +1,5 @@
 import models
 
-
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from playhouse.shortcuts import model_to_dict
@@ -15,7 +14,6 @@ post = Blueprint('posts', 'post')
 def create_post():
     try:
         payload = request.get_json()
-        print(payload)
         created_post = models.Posts.create(
         user_posts=payload['user_posts'],
         trip_id=current_user.id
@@ -28,10 +26,22 @@ def create_post():
 
 
 @post.route('/<id>', methods=["GET"])
-@login_required
 def get_one_post(id):
     post = models.Post.get_by_id(id)
     return jsonify(data=model_to_dict(post), status={"code": 200, "message": "Success"})
+
+
+@post.route('/', methods=["GET"])
+def get_posts():
+    try:
+        posts = [model_to_dict(post) for post in models.Posts]
+        print(f"here is the list of all my posts. {posts}")
+        return jsonify(data=posts, status={"code": 201, "message": "success"})
+
+    except models.DoesNotExist:
+        return jsonify(
+        data={}, status={"code": 401, "message": "Error getting Resources"})
+
 
 
 @post.route('/<id>', methods=["PUT"])
