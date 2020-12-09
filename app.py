@@ -23,10 +23,10 @@ PORT = 8000
 app = Flask(__name__)
 mail = Mail(app)
 
-app.config.update(
-    SESSION_COOKIE_SECURE=True,
-    SESSION_COOKIE_SAMESITE='None'
-)
+# app.config.update(
+#     SESSION_COOKIE_SECURE=True,
+#     SESSION_COOKIE_SAMESITE='None'
+# )
 
 app.secret_key = "Dust Bunnies Snuggle best with Dirty Dogs"
 
@@ -43,11 +43,11 @@ def load_user(user_id):
         return None
 
 
-CORS(user, origins=['http://localhost:3000', 'https://trips-front.herokuapp.com'], supports_credentials=True)
-CORS(trip, origins=['http://localhost:3000', 'https://trips-front.herokuapp.com'], supports_credentials=True)
-CORS(post, origins=['http://localhost:3000', 'https://trips-front.herokuapp.com'], supports_credentials=True)
-CORS(picture, origins=['http://localhost:3000', 'https://trips-front.herokuapp.com'], supports_credentials=True)
-CORS(comment, origins=['http://localhost:3000', 'https://trips-front.herokuapp.com'], supports_credentials=True)
+CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(trip, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(post, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(picture, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(comment, origins=['http://localhost:3000'], supports_credentials=True)
 
 
 app.register_blueprint(user, url_prefix='/api/users')
@@ -72,10 +72,6 @@ def before_request():
 def after_request(response):
     g.db.close()
     return response
-
-if 'ON_HEROKU' in os.environ:
-        print('\non heroku!')
-        models.initialize()
 
 
 if __name__ == '__main__':
