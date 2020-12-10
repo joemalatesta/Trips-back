@@ -50,11 +50,11 @@ CORS(picture, origins=['http://localhost:3000', 'https://tripsfrontend-app.herok
 CORS(comment, origins=['http://localhost:3000', 'https://tripsfrontend-app.herokuapp.com/'], supports_credentials=True)
 
 
-app.register_blueprint(user, url_prefix='/api/users')
-app.register_blueprint(trip, url_prefix='/api/trips')
-app.register_blueprint(post, url_prefix='/api/posts')
-app.register_blueprint(picture, url_prefix='/api/pictures')
-app.register_blueprint(comment, url_prefix='/api/comments')
+app.register_blueprint(user, url_prefix='api/users')
+app.register_blueprint(trip, url_prefix='api/trips')
+app.register_blueprint(post, url_prefix='api/posts')
+app.register_blueprint(picture, url_prefix='api/pictures')
+app.register_blueprint(comment, url_prefix='api/comments')
 
 
 @app.route('/')
