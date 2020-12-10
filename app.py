@@ -43,11 +43,11 @@ def load_user(user_id):
         return None
 
 
-CORS(user, origins=['http://localhost:3000', 'https://tripsfrontend-app.herokuapp.com/'], supports_credentials=True)
-CORS(trip, origins=['http://localhost:3000', 'https://tripsfrontend-app.herokuapp.com/'], supports_credentials=True)
-CORS(post, origins=['http://localhost:3000', 'https://tripsfrontend-app.herokuapp.com/'], supports_credentials=True)
-CORS(picture, origins=['http://localhost:3000', 'https://tripsfrontend-app.herokuapp.com/'], supports_credentials=True)
-CORS(comment, origins=['http://localhost:3000', 'https://tripsfrontend-app.herokuapp.com/'], supports_credentials=True)
+CORS(user, origins=['http://localhost:3000', 'https://tripsfrontend-app.herokuapp.com'], supports_credentials=True)
+CORS(trip, origins=['http://localhost:3000', 'https://tripsfrontend-app.herokuapp.com'], supports_credentials=True)
+CORS(post, origins=['http://localhost:3000', 'https://tripsfrontend-app.herokuapp.com'], supports_credentials=True)
+CORS(picture, origins=['http://localhost:3000', 'https://tripsfrontend-app.herokuapp.com'], supports_credentials=True)
+CORS(comment, origins=['http://localhost:3000', 'https://tripsfrontend-app.herokuapp.com'], supports_credentials=True)
 
 
 app.register_blueprint(user, url_prefix='/api/users')
