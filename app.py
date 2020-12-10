@@ -23,10 +23,10 @@ PORT = 8000
 app = Flask(__name__)
 mail = Mail(app)
 
-# app.config.update(
-#     SESSION_COOKIE_SECURE=True,
-#     SESSION_COOKIE_SAMESITE='None'
-# )
+app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_SAMESITE='None'
+)
 
 app.secret_key = "Dust Bunnies Snuggle best with Dirty Dogs"
 
@@ -74,6 +74,20 @@ def after_request(response):
     return response
 
 
+if 'ON_HEROKU' in os.environ:
+    print('\non heroku!')
+    models.initialize()
+
+
 if __name__ == '__main__':
 	models.initialize()
 	app.run(debug=DEBUG, port=PORT)
+
+
+
+
+
+
+
+
+# end
