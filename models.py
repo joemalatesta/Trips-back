@@ -38,7 +38,6 @@ class Comments(Model):
         database = DATABASE
 
 
-
 def initialize():
     DATABASE.connect()
     DATABASE.create_tables([User, Trips, Comments], safe=True)
