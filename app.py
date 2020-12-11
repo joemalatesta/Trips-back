@@ -20,11 +20,11 @@ app = Flask(__name__)
 
 app.secret_key = "Dust Bunnies Snuggle best with Dirty Dogs"
 
-# if 'ON_HEROKU' in os.environ:
-#     app.config.update(
-#         SESSION_COOKIE_SECURE=True,
-#         SESSION_COOKIE_SAMESITE='None'
-#     )
+if 'ON_HEROKU' in os.environ:
+    app.config.update(
+        SESSION_COOKIE_SECURE=True,
+        SESSION_COOKIE_SAMESITE='None'
+    )
 
 login_manager = LoginManager()
 login_manager.init_app(app)
