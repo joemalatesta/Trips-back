@@ -111,7 +111,7 @@ def get_one_post(id):
     return jsonify(data=model_to_dict(post), status={"code": 200, "message": "Success"})
 
 
-@trip.route('posts/<id>', methods=["PUT"])
+@trip.route('/posts/<id>', methods=["PUT"])
 @login_required
 def update_post(id):
     payload = request.get_json()
@@ -121,7 +121,7 @@ def update_post(id):
     return jsonify(data=post, status={"code": 200, "message": "Success"})
 
 
-@trip.route('posts/<id>', methods=["DELETE"])
+@trip.route('/posts/<id>', methods=["DELETE"])
 @login_required
 def delete_post(id):
     delete_query = models.Post.delete().where(models.Post.id == id)
