@@ -19,6 +19,13 @@ PORT = 8000
 app = Flask(__name__)
 
 app.secret_key = "Dust Bunnies Snuggle best with Dirty Dogs"
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'thatguyfromcodingcamp@gmail.com'
+app.config['MAIL_PASSWORD'] = 'campcamp'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
 
 if 'ON_HEROKU' in os.environ:
     app.config.update(
@@ -48,6 +55,15 @@ app.register_blueprint(user, url_prefix='/api/users')
 app.register_blueprint(trip, url_prefix='/api/trips')
 app.register_blueprint(comment, url_prefix='/api/comments')
 
+mail = Mail(app)
+
+@app.route("/send/<id>")
+def index():
+    msg = Message("I got to my favorite spot!!",  sender = "thatguyfromcodingcamp@gmail.com",
+        recipients=[{trips.user.email}])
+    msg.body = "everything is going well!!"
+    mail.send(msg)
+    return jsonify(data={}, status={"code": 201, "message": "success"})
 
 
 @app.route('/')
