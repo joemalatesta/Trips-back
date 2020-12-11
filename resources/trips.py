@@ -84,7 +84,6 @@ def delete_trip(id):
 def get_posts():
     try:
         posts = [model_to_dict(post) for post in models.Posts]
-        print(f"here is the list of all my posts. {posts}")
         return jsonify(data=posts, status={"code": 201, "message": "success"})
 
     except models.DoesNotExist:
@@ -102,7 +101,6 @@ def create_post():
         user_posts = payload['user_posts'],
         trip_id = current_user.id
         )
-        print(f"here is the post route for post and this is the information I get {payload}")
         post_dict = model_to_dict(created_post)
         return jsonify(data=post_dict, status={"code": 201, "message": "Success"})
     except:
@@ -142,7 +140,6 @@ def delete_post(id):
 def get_all_my_pictures():
     try:
         pictures = [model_to_dict(picture) for picture in models.Pictures]
-        print(f"here is the list of pictures. {pictures}")
         return jsonify(data=pictures, status={"code": 201, "message": "success"})
 
     except models.DoesNotExist:
@@ -151,11 +148,9 @@ def get_all_my_pictures():
 
 
 @trip.route('/pics/', methods=["POST"])
-
 def create_picture():
     try:
         payload = request.get_json()
-        print(payload)
         created_picture = models.Pictures.create(
         trip_pics=payload['trip_pics'],
         post=current_user.id
@@ -163,7 +158,6 @@ def create_picture():
 
         picture_dict = model_to_dict(created_picture)
         to_return = jsonify(data=picture_dict, status={"code": 201, "message": "Success"})
-        print(to_return)
         return to_return
     except:
         return jsonify(status={"code": 400, "message": "Not Successful"})

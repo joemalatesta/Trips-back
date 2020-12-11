@@ -14,7 +14,6 @@ comment = Blueprint('comments', 'comment')
 def get_all_my_comments():
     try:
         comments = [model_to_dict(comment) for comment in models.Comments]
-        print(f"here is the list of comments. {comments}")
         return jsonify(data=comments, status={"code": 201, "message": "success"})
 
     except models.DoesNotExist:
@@ -27,7 +26,6 @@ def get_all_my_comments():
 def create_comment():
     try:
         payload = request.get_json()
-        print(payload)
         created_comment = models.Comments.create(
         comments=payload['comments'],
         pic_id=current_user.id
@@ -35,7 +33,6 @@ def create_comment():
 
         comment_dict = model_to_dict(created_comment)
         to_return = jsonify(data=comment_dict, status={"code": 201, "message": "Success"})
-        print(to_return)
         return to_return
     except:
         return jsonify(status={"code": 400, "message": "Not Successful"})

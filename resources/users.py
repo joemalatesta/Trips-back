@@ -38,7 +38,6 @@ def register():
         )
 
         created_user_dict = model_to_dict(created_user)
-        print(created_user_dict)
         login_user(created_user)
         created_user_dict.pop('password')
 
@@ -52,19 +51,16 @@ def register():
 @user.route('/login', methods=['POST'])
 def login():
     payload = request.get_json()
-    #payload['email'] = payload['email'].lower()
     payload['username'] = payload['username'].lower()
 
     try:
         user = models.User.get(models.User.username == payload['username'])
-
         user_dict = model_to_dict(user)
         password_is_good = check_password_hash(user_dict['password'], payload['password'])
 
         if(password_is_good):
             login_user(user)
             user_dict.pop('password')
-
             return jsonify(
                 data=user_dict,
                 message=f"Successfully logged in {user_dict['username']}",
