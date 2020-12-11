@@ -9,7 +9,6 @@ from playhouse.shortcuts import model_to_dict
 comment = Blueprint('comments', 'comment')
 
 
-
 @comment.route('/', methods=['GET'])
 def get_all_my_comments():
     try:

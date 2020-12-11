@@ -53,8 +53,6 @@ def get_all_my_trips():
         data={}, status={"code": 401, "message": "Error getting Resources"})
 
 
-
-
 @trip.route('/<id>', methods=["GET"])
 def get_one_trip(id):
     trip = models.Trips.get_by_id(id)
